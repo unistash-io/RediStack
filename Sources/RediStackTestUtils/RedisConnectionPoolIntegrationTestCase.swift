@@ -101,7 +101,8 @@ open class RedisConnectionPoolIntegrationTestCase: XCTestCase {
                 connectionFactoryConfiguration: .init(connectionPassword: self.redisPassword),
                 minimumConnectionCount: minimumConnectionCount,
                 initialConnectionBackoffDelay: initialConnectionBackoffDelay,
-                connectionRetryTimeout: connectionRetryTimeout
+                connectionRetryTimeout: connectionRetryTimeout,
+                clientTLSConfiguration: .clientDefault
             ),
             boundEventLoop: self.eventLoopGroup.next()
         )

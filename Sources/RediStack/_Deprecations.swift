@@ -125,6 +125,7 @@ extension RedisConnectionPool {
                 connectionBackoffFactor: connectionBackoffFactor,
                 initialConnectionBackoffDelay: initialConnectionBackoffDelay,
                 connectionRetryTimeout: connectionRetryTimeout,
+                clientTLSConfiguration: .clientDefault,
                 poolDefaultLogger: poolLogger
             ),
             boundEventLoop: loop
