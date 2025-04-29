@@ -80,6 +80,7 @@ extension RedisConnection {
             username: String? = nil,
             password: String? = nil,
             initialDatabase: Int? = nil,
+            tlsConfiguration: TLSConfiguration? = nil,
             defaultLogger: Logger? = nil
         ) throws {
             if initialDatabase != nil && initialDatabase! < 0 {
@@ -90,6 +91,7 @@ extension RedisConnection {
             self.username = username
             self.password = password
             self.initialDatabase = initialDatabase
+            self.tlsConfiguration = tlsConfiguration
             self.defaultLogger = defaultLogger ?? Configuration.defaultLogger
         }
 

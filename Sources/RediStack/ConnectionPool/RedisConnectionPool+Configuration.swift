@@ -15,6 +15,7 @@
 import NIOCore
 import NIOPosix
 import Logging
+import NIOSSL
 
 extension RedisConnectionPool {
     /// A configuration object for creating Redis connections with a connection pool.
@@ -98,6 +99,8 @@ extension RedisConnectionPool {
         public let onUnexpectedConnectionClose: ((RedisConnection) -> Void)?
         // these need to be var so they can be updated by the pool in some cases
         public internal(set) var factoryConfiguration: ConnectionFactoryConfiguration
+        
+        public internal(set) var clientTLSConfiguration: TLSConfiguration?
         /// The logger prototype that will be used by the connection pool by default when generating logs.
         public internal(set) var poolDefaultLogger: Logger
 
@@ -126,6 +129,7 @@ extension RedisConnectionPool {
             initialConnectionBackoffDelay: TimeAmount = .milliseconds(100),
             connectionRetryTimeout: TimeAmount? = .seconds(60),
             onUnexpectedConnectionClose: ((RedisConnection) -> Void)? = nil,
+            clientTLSConfiguration: TLSConfiguration?,
             poolDefaultLogger: Logger? = nil
         ) {
             self.initialConnectionAddresses = initialServerConnectionAddresses
@@ -137,6 +141,7 @@ extension RedisConnectionPool {
                 connectionRetryTimeout ?? .milliseconds(10) // always default to a baseline 10ms
             )
             self.onUnexpectedConnectionClose = onUnexpectedConnectionClose
+            self.clientTLSConfiguration = clientTLSConfiguration
             self.poolDefaultLogger = poolDefaultLogger ?? .redisBaseConnectionPoolLogger
         }
     }

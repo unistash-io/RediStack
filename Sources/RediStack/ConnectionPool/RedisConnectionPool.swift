@@ -222,6 +222,7 @@ extension RedisConnectionPool {
                 username: factoryConfig.connectionUsername,
                 password: factoryConfig.connectionPassword,
                 initialDatabase: factoryConfig.connectionInitialDatabase,
+                tlsConfiguration: self.configuration.clientTLSConfiguration,
                 defaultLogger: factoryConfig.connectionDefaultLogger
             )
         } catch {
